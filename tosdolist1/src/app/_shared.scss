@@ -1,0 +1,8 @@
+$min_card_height: 50px;
+$main_button_color: #14b31c;
+$destr_button_color: #b31414;
+
+@mixin sizes($width, $height){
+    width: $width;
+    height: $height;
+}

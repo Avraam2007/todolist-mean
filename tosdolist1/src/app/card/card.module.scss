@@ -1,0 +1,143 @@
+@use "../shared";
+
+@keyframes slidein {
+  from {
+    margin-left: 100vw;
+  }
+
+  to {
+    margin-left: 0vw;
+  }
+}
+
+.todo-card {
+    background-color: #d5d5d5;
+    width: 80vw;
+    min-height: shared.$min_card_height;
+    padding: 10px;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+
+    animation-duration: 0.5s;
+    animation-name: slidein;
+
+    .done-btn, .del-btn, .edit-btn {
+        display: none;
+    }
+
+    &:hover {
+        .done-btn, .del-btn, .edit-btn {
+            display: inline-block;
+        }
+    }
+}
+
+.todo-card-done {
+    background-color: #ace5af;
+    width: 80vw;
+    min-height: shared.$min_card_height;
+    padding: 10px;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+
+    animation-duration: 0.5s;
+    animation-name: slidein;
+    overflow: hidden;
+
+    .card-title {
+        text-decoration: underline;
+    }
+
+    .done-btn {
+        display: none;
+    }
+
+    .del-btn {
+        display: none;
+    }
+
+    .edit-btn {
+        display: none;
+    }
+
+    &:hover {
+        .del-btn {
+            display: inline-block;
+        }
+
+        .edit-btn {
+            display: inline-block;
+        }
+    }
+}
+
+.card-title {
+    flex-grow: 1;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+
+.button-container {
+    min-width: 130px;
+    height: 30px;
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+}
+
+.done-btn {
+    min-width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    color: #ffffff;
+    background-color: shared.$main_button_color;
+    border: none;
+    opacity: 75%;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 100%;
+    }
+}
+
+.del-btn {
+    min-width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    color: #ffffff;
+    background-color: shared.$destr_button_color;
+    border: none;
+    cursor: pointer;
+
+    opacity: 75%;
+
+    &:hover {
+        opacity: 100%;
+    }
+}
+
+.edit-btn {
+    min-width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    color: #ffffff;
+    background-color: #787878;
+    border: none;
+    cursor: pointer;
+
+    opacity: 75%;
+
+    &:hover {
+        opacity: 100%;
+    }
+}

@@ -1,0 +1,60 @@
+@use "./shared";
+
+@keyframes slidein {
+  from {
+    bottom: -100px;
+  }
+
+  to {
+    margin-top: 20px;
+  }
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+
+app-card-field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+
+.up-btn {
+    @include shared.sizes(50px,50px);
+    border-radius: 3px;
+    background-color: shared.$main_button_color;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.5s;
+    animation-duration: 0.4s;
+    animation-name: slidein;
+
+
+    &:hover, &:focus {
+        background-color: darken($color: shared.$main_button_color, $amount: 7);
+    }
+
+    &:active {
+        background-color: lighten($color: shared.$main_button_color, $amount: 5);
+    }
+}
+
+.up-btn-text {
+    text-align: center;
+    position: relative;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    font-size: 35px;
+
+}

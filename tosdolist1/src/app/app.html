@@ -1,0 +1,8 @@
+<main>
+  <app-header></app-header>
+  <app-card-field></app-card-field>
+</main>
+<div class="up-btn" *ngIf="windowScrolled" (click)="toTheTop()" id="topButton" #idButton>
+    <p class="up-btn-text fa-solid fa-angle-up"></p>
+</div>
+<router-outlet />

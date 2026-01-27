@@ -1,0 +1,8 @@
+<div class="{{cardClass}}" id="card-{{id}}">
+    <p class="card-title" id="title-{{id}}">{{title}}</p>
+    <div class="button-container">
+        <button class="done-btn" id="doneCardBtn-{{id}}" (click)="doneTask(id)" [style.display]="isStatus('done') || isStatus('deleted') ? 'none' : ''"><p class="done-btn-text fa-solid fa-check"></button>
+        <button class="del-btn" id="delCardBtn-{{id}}" (click)="deleteTask(id)" [style.display]="isStatus('deleted') ? 'none' : ''"><p class="del-btn-text fa-solid fa-trash"></button>
+        <button class="edit-btn" id="editCardBtn-{{id}}" (click)="editTask(id)"><p class="edit-btn-text fa-solid fa-pencil"></button>
+    </div>                
+</div>
