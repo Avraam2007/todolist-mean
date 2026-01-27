@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <main>
+        <h1 class="title">Todo List</h1>
+        <div class="card-creator">
+            <input type="text" name="title" placeholder="Enter title card" id="cardTitle" class="text-field" required />
+            <button id="addCard" class="add-btn">
+                <p class="add-btn-text">Add</p>
+            </button>
+        </div>
+        <div class="select-block">
+            <label for="cardCategories" class="categories-label">Choose category list: </label>
+            <select name="cardCategories" id="cardCategories" title="Enter" class="select">
+                <option value="1" selected>
+                    <p class="choose-text">All</p>
+                </option>
+                <option value="2">
+                    <p class="choose-text">Active</p>
+                </option>
+                <option value="3">
+                    <p class="choose-text">Done</p>
+                </option>
+                <option value="4">
+                    <p class="choose-text">Deleted</p>
+                </option>
+            </select>
+            <button id="submitBtn" class="submit-btn">
+                <p class="submit-btn-text">Submit</p>
+            </button>
+        </div>
+        <div class="todo-board" id="board"></div>
+        <button class="clear-btn" id="clearBoard">
+            <p class="clear-btn-text">Clear</p>
+        </button>
+        <p class="note-text">Note: please clear your board if you deleted all tasks</p>
+    </main>
+    <script src="js/index.js" type="module"></script>
+</body>
+</html>

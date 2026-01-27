@@ -1,0 +1,245 @@
+.todo-card {
+  background-color: #d5d5d5;
+  width: 100%;
+  min-height: 50px;
+  padding: 10px;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+}
+.todo-card .done-btn, .todo-card .del-btn, .todo-card .edit-btn {
+  display: none;
+}
+.todo-card:hover .done-btn, .todo-card:hover .del-btn, .todo-card:hover .edit-btn {
+  display: inline-block;
+}
+
+.done-todo-card {
+  background-color: #ace5af;
+  width: 100%;
+  min-height: 50px;
+  padding: 10px;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+}
+.done-todo-card .card-title {
+  text-decoration: underline;
+}
+.done-todo-card .done-btn {
+  display: none;
+}
+.done-todo-card .del-btn {
+  display: none;
+}
+.done-todo-card .edit-btn {
+  display: none;
+}
+.done-todo-card:hover .done-btn {
+  display: inline-block;
+}
+.done-todo-card:hover .del-btn {
+  display: inline-block;
+}
+.done-todo-card:hover .edit-btn {
+  display: inline-block;
+}
+
+.card-title {
+  flex-grow: 1;
+}
+
+.button-container {
+  width: 130px;
+  min-width: 130px;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.done-btn {
+  height: 30px;
+  border-radius: 3px;
+  color: #ffffff;
+  background-color: #14b31c;
+  border: none;
+  opacity: 75%;
+}
+.done-btn:hover {
+  opacity: 100%;
+}
+
+.del-btn {
+  height: 30px;
+  border-radius: 3px;
+  color: #ffffff;
+  background-color: #b31414;
+  border: none;
+  opacity: 75%;
+}
+.del-btn:hover {
+  opacity: 100%;
+}
+
+.edit-btn {
+  height: 30px;
+  border-radius: 3px;
+  color: #ffffff;
+  background-color: #787878;
+  border: none;
+  opacity: 75%;
+}
+.edit-btn:hover {
+  opacity: 100%;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Arial";
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: 0.5s;
+}
+a:hover {
+  cursor: pointer;
+}
+
+body, html {
+  height: 100%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+
+.title {
+  text-align: center;
+  margin: 50px auto;
+}
+
+.card-creator {
+  width: 450px;
+  margin: 0 auto;
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.text-field {
+  flex-grow: 1;
+  height: 30px;
+  padding-left: 4px;
+  font-size: 16px;
+  border-radius: 3px;
+  border: 1px solid #696969;
+}
+
+.add-btn {
+  border-radius: 3px;
+  width: 55px;
+  color: #ffffff;
+  background-color: #14b31c;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.add-btn:hover {
+  background-color: rgb(17.4371859296, 156.0628140704, 24.4120603015);
+}
+.add-btn:active {
+  background-color: rgb(22.5628140704, 201.9371859296, 31.5879396985);
+}
+
+.select-block {
+  margin: 50px auto;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: start;
+  align-items: center;
+}
+.select-block .select {
+  width: 80px;
+  height: 30px;
+  padding: 5px;
+  font-size: 14px;
+  background-color: #fff;
+  border-radius: 3px;
+  border: 1px solid #696969;
+}
+
+.submit-btn {
+  border-radius: 3px;
+  width: 55px;
+  height: 30px;
+  color: #ffffff;
+  background-color: #14b31c;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.submit-btn:hover {
+  background-color: rgb(17.4371859296, 156.0628140704, 24.4120603015);
+}
+.submit-btn:active {
+  background-color: rgb(22.5628140704, 201.9371859296, 31.5879396985);
+}
+
+.todo-board {
+  width: 80%;
+  border-radius: 3px;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: start;
+  align-items: start;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.clear-btn {
+  margin: 50px auto;
+  display: block;
+  border-radius: 3px;
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: #14b31c;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.clear-btn:hover {
+  background-color: rgb(17.4371859296, 156.0628140704, 24.4120603015);
+}
+.clear-btn:active {
+  background-color: #fff;
+  transform: scale(1.2);
+}
+
+.note-text {
+  color: #696969;
+}
+
+/*# sourceMappingURL=style.css.map */

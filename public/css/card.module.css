@@ -1,0 +1,104 @@
+.todo-card {
+  background-color: #d5d5d5;
+  width: 100%;
+  min-height: 50px;
+  padding: 10px;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+}
+.todo-card .done-btn, .todo-card .del-btn, .todo-card .edit-btn {
+  display: none;
+}
+.todo-card:hover .done-btn, .todo-card:hover .del-btn, .todo-card:hover .edit-btn {
+  display: inline-block;
+}
+
+.done-todo-card {
+  background-color: #ace5af;
+  width: 100%;
+  min-height: 50px;
+  padding: 10px;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+}
+.done-todo-card .card-title {
+  text-decoration: underline;
+}
+.done-todo-card .done-btn {
+  display: none;
+}
+.done-todo-card .del-btn {
+  display: none;
+}
+.done-todo-card .edit-btn {
+  display: none;
+}
+.done-todo-card:hover .done-btn {
+  display: inline-block;
+}
+.done-todo-card:hover .del-btn {
+  display: inline-block;
+}
+.done-todo-card:hover .edit-btn {
+  display: inline-block;
+}
+
+.card-title {
+  flex-grow: 1;
+}
+
+.button-container {
+  width: 130px;
+  min-width: 130px;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.done-btn {
+  height: 30px;
+  border-radius: 3px;
+  color: #ffffff;
+  background-color: #14b31c;
+  border: none;
+  opacity: 75%;
+}
+.done-btn:hover {
+  opacity: 100%;
+}
+
+.del-btn {
+  height: 30px;
+  border-radius: 3px;
+  color: #ffffff;
+  background-color: #b31414;
+  border: none;
+  opacity: 75%;
+}
+.del-btn:hover {
+  opacity: 100%;
+}
+
+.edit-btn {
+  height: 30px;
+  border-radius: 3px;
+  color: #ffffff;
+  background-color: #787878;
+  border: none;
+  opacity: 75%;
+}
+.edit-btn:hover {
+  opacity: 100%;
+}
+
+/*# sourceMappingURL=card.module.css.map */

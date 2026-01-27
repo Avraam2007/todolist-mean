@@ -1,0 +1,122 @@
+@use "./shared";
+
+.todo-card {
+    background-color: #d5d5d5;
+    width: 100%;
+    min-height: shared.$min_card_height;
+    padding: 10px;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+
+    .done-btn, .del-btn, .edit-btn {
+        display: none;
+    }
+
+    &:hover {
+        .done-btn, .del-btn, .edit-btn {
+            display: inline-block;
+        }
+    }
+}
+
+.done-todo-card {
+    background-color: #ace5af;
+    width: 100%;
+    min-height: shared.$min_card_height;
+    padding: 10px;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+
+    .card-title {
+        text-decoration: underline;
+    }
+
+    .done-btn {
+        display: none;
+    }
+
+    .del-btn {
+        display: none;
+    }
+
+    .edit-btn {
+        display: none;
+    }
+
+    &:hover {
+        .done-btn {
+            display: inline-block;
+        }
+
+        .del-btn {
+            display: inline-block;
+        }
+
+        .edit-btn {
+            display: inline-block;
+        }
+    }
+}
+
+.card-title {
+    flex-grow: 1;
+}
+
+.button-container {
+    width: 130px;
+    min-width: 130px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.done-btn {
+    height: 30px;
+    border-radius: 3px;
+    color: #ffffff;
+    background-color: shared.$main_button_color;
+    border: none;
+    opacity: 75%;
+
+    &:hover {
+        opacity: 100%;
+    }
+}
+
+.del-btn {
+    height: 30px;
+    border-radius: 3px;
+    color: #ffffff;
+    background-color: #b31414;
+    border: none;
+
+    opacity: 75%;
+
+    &:hover {
+        opacity: 100%;
+    }
+}
+
+.edit-btn {
+    height: 30px;
+    border-radius: 3px;
+    color: #ffffff;
+    background-color: #787878;
+    border: none;
+
+    opacity: 75%;
+
+    &:hover {
+        opacity: 100%;
+    }
+}
