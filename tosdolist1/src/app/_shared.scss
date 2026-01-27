@@ -1,8 +1,38 @@
 $min_card_height: 50px;
 $main_button_color: #14b31c;
 $destr_button_color: #b31414;
+$card_button_size: 30px;
+$default-border-radius: 3px;
 
 @mixin sizes($width, $height){
     width: $width;
     height: $height;
+}
+
+@mixin centerIn(){
+    text-align: center;
+    position: relative;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+}
+
+@mixin flexbox($fd, $jc, $ai) {
+    display: flex;
+    flex-direction: $fd;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+@mixin baseBtnAnimations($color) {
+    cursor: pointer;
+    transition: 0.5s;
+
+    &:hover, &:focus {
+        background-color: darken($color, $amount: 7);
+    }
+
+    &:active {
+        background-color: lighten($color, $amount: 5);
+    }
 }

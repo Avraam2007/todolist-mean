@@ -1,19 +1,18 @@
 @use "../shared";
 
+$card_creator_width: 1px;
+
 .card-creator {
     @include shared.sizes(475px, 32px);
-    border-radius: 3px;
-    border: 1px solid #696969;
+    border-radius: calc(shared.$default-border-radius + $card_creator_width);
+    border: $card_creator_width solid #696969;
     margin: 0 auto;
-    display: flex;
-    flex-direction: row;
+    @include shared.flexbox(row,space-between,stretch);
     flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: stretch;
 }
 
 .text-field {
-    border-radius: 2px 0 0 2px;
+    border-radius: shared.$default-border-radius 0 0 shared.$default-border-radius;
     flex-grow: 1;
     border: none;
     padding-left: 4px;
@@ -29,22 +28,13 @@
 }
 
 .add-btn{
-    border-radius: 0 2px 2px 0;
+    border-radius: 0 shared.$default-border-radius shared.$default-border-radius 0;
     width: 55px;
     color: #ffffff;
     background-color: shared.$main_button_color;
     border: none;
-    cursor: pointer;
-    transition: 0.5s;
-
-    &:hover, &:focus {
-        background-color: darken($color: shared.$main_button_color, $amount: 7);
-    }
-
-    &:active {
-        background-color: lighten($color: shared.$main_button_color, $amount: 5);
-    }
-
+    @include shared.baseBtnAnimations(shared.$main_button_color);
+    
     &:-moz-focusring {
         outline: none;
     }
@@ -53,11 +43,8 @@
 .select-block {
     margin: 50px auto;
     width: fit-content;
-    display: flex;
-    flex-direction: row;
+    @include shared.flexbox(row,center,center);
     gap: 10px;
-    justify-content: center;
-    align-items: center;
 
     .select {
         @include shared.sizes(80px, 30px);
@@ -67,42 +54,33 @@
         
 
         background-color: #fff;
-        border-radius: 3px;
+        border-radius: shared.$default-border-radius;
         border: 1px solid #696969;
     }
 }
 
 .todo-board {
     width: 80%;
-    border-radius: 3px;
+    border-radius: shared.$default-border-radius;
     height: max-content;
     // max-height: 180px;
-    display: flex;
-    flex-direction: column-reverse;
+    @include shared.flexbox(column-reverse,end,start);
     gap: 10px;
-    justify-content: end;
-    align-items: start;
     overflow: hidden auto;
 }
 
 .clear-btn{
     margin: 50px auto;
     display: block;
-    border-radius: 3px;
+    border-radius: shared.$default-border-radius;
     @include shared.sizes(120px, 40px);
     font-size: 20px;
     color: #ffffff;
     background-color: shared.$destr_button_color;
     border: none;
-    cursor: pointer;
-    transition: 0.5s;
-
-    &:hover {
-        background-color: darken($color: shared.$destr_button_color, $amount: 5);
-    }
+    @include shared.baseBtnAnimations(shared.$destr_button_color);
 
     &:active {
-        background-color: #fff;
         transform: scale(1.2);
     }
 }

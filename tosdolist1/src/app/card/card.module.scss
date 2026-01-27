@@ -10,16 +10,29 @@
   }
 }
 
-.todo-card {
-    background-color: #d5d5d5;
+@mixin cardBtn($bc){
+    min-width: shared.$card_button_size;
+    height: shared.$card_button_size;
+    border-radius: shared.$default-border-radius;
+    color: #ffffff;
+    background-color: $bc;
+    border: none;
+    cursor: pointer;
+
+    opacity: 75%;
+
+    &:hover {
+        opacity: 100%;
+    }
+}
+
+@mixin todoCard($bc, $isDoneBtnVisible) {
+    background-color: $bc;
     width: 80vw;
     min-height: shared.$min_card_height;
     padding: 10px;
-    border-radius: 3px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    border-radius: shared.$default-border-radius;
+    @include shared.flexbox(row,space-between,center);
     gap: 50px;
 
     animation-duration: 0.5s;
@@ -30,52 +43,28 @@
     }
 
     &:hover {
-        .done-btn, .del-btn, .edit-btn {
+        .del-btn, .edit-btn {
             display: inline-block;
+        }
+
+        @if $isDoneBtnVisible {
+            .done-btn {
+                display: inline-block;
+            }
         }
     }
 }
 
-.todo-card-done {
-    background-color: #ace5af;
-    width: 80vw;
-    min-height: shared.$min_card_height;
-    padding: 10px;
-    border-radius: 3px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 50px;
+.todo-card {
+    @include todoCard(#d5d5d5, true);
+}
 
-    animation-duration: 0.5s;
-    animation-name: slidein;
+.todo-card-done {
+    @include todoCard(#ace5af, false);
     overflow: hidden;
 
     .card-title {
         text-decoration: underline;
-    }
-
-    .done-btn {
-        display: none;
-    }
-
-    .del-btn {
-        display: none;
-    }
-
-    .edit-btn {
-        display: none;
-    }
-
-    &:hover {
-        .del-btn {
-            display: inline-block;
-        }
-
-        .edit-btn {
-            display: inline-block;
-        }
     }
 }
 
@@ -86,58 +75,20 @@
 }
 
 .button-container {
-    min-width: 130px;
-    height: 30px;
-    display: flex;
+    min-width: calc(3*shared.$card_button_size + 2*10px);
+    height: shared.$card_button_size;
+    @include shared.flexbox(row,end,center);
     gap: 10px;
-    flex-direction: row;
-    justify-content: end;
-    align-items: center;
 }
 
 .done-btn {
-    min-width: 30px;
-    height: 30px;
-    border-radius: 3px;
-    color: #ffffff;
-    background-color: shared.$main_button_color;
-    border: none;
-    opacity: 75%;
-    cursor: pointer;
-
-    &:hover {
-        opacity: 100%;
-    }
+    @include cardBtn(shared.$main_button_color);
 }
 
 .del-btn {
-    min-width: 30px;
-    height: 30px;
-    border-radius: 3px;
-    color: #ffffff;
-    background-color: shared.$destr_button_color;
-    border: none;
-    cursor: pointer;
-
-    opacity: 75%;
-
-    &:hover {
-        opacity: 100%;
-    }
+    @include cardBtn(shared.$destr_button_color);
 }
 
 .edit-btn {
-    min-width: 30px;
-    height: 30px;
-    border-radius: 3px;
-    color: #ffffff;
-    background-color: #787878;
-    border: none;
-    cursor: pointer;
-
-    opacity: 75%;
-
-    &:hover {
-        opacity: 100%;
-    }
+    @include cardBtn(#787878);
 }
