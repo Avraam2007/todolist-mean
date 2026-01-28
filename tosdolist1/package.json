@@ -2,6 +2,7 @@
   "name": "tosdolist1",
   "version": "0.0.0",
   "scripts": {
+    "proxy": "ng serve --proxy-config proxy.config.json",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",

@@ -31,18 +31,27 @@ app.put('/form', (req,res) => {
     
 })
 
-app.get('/api/tasks', function (req, res, next) {
-  res.json(jsonData)
+app.get('/api/tasks', async function (req, res, next) {
+  jsonData = await ConnectDB.ReadDB();
+  res.json(jsonData);
+  // res.status(200).json({
+  //   message: 'JSON data retrieved successfully',
+  //   data: jsonData
+  // });
 })
 
 app.post('/api/tasks', function (req, res, next) {
   jsonData = req.body;
   res.status(200).json({
-    message: 'JSON data recieved successfully',
+    message: 'JSON data received successfully',
     data: jsonData
   })
   ConnectDB.SendDB(jsonData);
 })
+
+app.get('/lol', (req, res) => {
+  res.status(418).send('<h1 align="center">LOL</h1>');
+});
 
 app.use((req,res) => {
     res.status(404);

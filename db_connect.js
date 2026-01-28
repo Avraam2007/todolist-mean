@@ -23,7 +23,7 @@ const clientOptions = { serverApi: { version: '1', strict: true, deprecationErro
 
 const db = mongoose.connection;
 
-module.exports = {ConnectDB, SendDB};
+module.exports = {ConnectDB, SendDB, ReadDB};
 
 
 async function ConnectDB() {
@@ -49,6 +49,21 @@ async function SendDB(dataArray) {
     console.log(`Number of documents inserted: ${insertedDocs.length}`);
   } catch (err) {
     console.error('Error inserting documents:', err.message);
+  }
+  finally {
+    await mongoose.disconnect();
+  }
+}
+
+async function ReadDB() {
+  await mongoose.connect(uri, clientOptions);
+  try {
+    const selectedDocs = await Card.find({});
+    console.log(`Number of documents read: ${selectedDocs.length}`);
+    return selectedDocs;
+  } catch (err) {
+    console.error('Error reading documents:', err.message);
+    return null;
   }
   finally {
     await mongoose.disconnect();

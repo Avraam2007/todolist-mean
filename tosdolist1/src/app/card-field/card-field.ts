@@ -15,9 +15,33 @@ export class CardField {
  
     @ViewChild('messagecontainer', { read: ViewContainerRef }) entry!: ViewContainerRef;
     constructor(private resolver: ComponentFactoryResolver) {
-      // window.onload = () => {
-      //   logic();
-      // }
+      window.onload = () => {
+        this.getData();
+      }
+    }
+
+    async getData() {
+      try {
+        const response : Response = await fetch('http://localhost:3001/api/tasks');
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+        const data = await response.json();
+        if(data !== null && data !== undefined) {
+          data.forEach((item: { title: any; status: any; }) => {
+          getDatabase().push({
+            id:this.count.count,
+            title: item.title,
+            status: item.status
+          });
+          this.count.count++;
+        });
+        }
+      } catch (error) {
+        console.error(`Error: ${error}`);
+      }
+      console.log(getDatabase());
+      this.showCategoryCards();
     }
     
  
@@ -89,24 +113,26 @@ export class CardField {
     }
 
     showCategoryCards():void {
-      this.entry.clear();
       const selectElement = (<HTMLInputElement>document.querySelector("#cardCategories"));
           getDatabase().forEach( item => {  
               if(parseInt(selectElement.value) === 1 && item.status !== "deleted") {
-                  // document.getElementById("board")!.insertAdjacentHTML('afterbegin',card.cardTemplate(item.id, item.title, item.status, (item.status == "done" ? "done-todo-card": undefined)))
                   this.createComponent(item.title, item.id, item.status,(item.status == "done" ? "todo-card-done": "todo-card"));
               }
               else if(parseInt(selectElement.value) === 2 && item.status === "active") {
                   this.createComponent(item.title, item.id, item.status);
               }
               else if(parseInt(selectElement.value) === 3 && item.status === "done") {
-                  // document.getElementById("board")!.insertAdjacentHTML('afterbegin',card.cardTemplate(item.id, item.title, item.status, "done-todo-card"))
                   this.createComponent(item.title, item.id, item.status, "todo-card-done");
               }
               else if(parseInt(selectElement.value) === 4 && item.status === "deleted") {
                   this.createComponent(item.title, item.id, item.status);
               }
           });
+    }
+
+    showCategoryCardsWithSync():void {
+      this.entry.clear();
+      this.showCategoryCards()
       this.sendData();
     }
 }
