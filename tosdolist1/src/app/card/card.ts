@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { getDatabase } from '../card-field/db';
+import { NgClass } from '@angular/common';
+import { IsDarkSingleton } from '../card-field/isDark';
 
 @Component({
   selector: 'app-card',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './card.html',
   styleUrl: './card.module.scss',
 })
@@ -14,6 +16,11 @@ export class Card {
   @Input() status: "done" | "active" | "deleted";
   @Input() cardClass: "todo-card" | "todo-card-done";
   @Input() isDeleted: boolean;
+
+  isDarkObject = IsDarkSingleton.instance;
+  isDark() {
+    return this.isDarkObject.isDark;
+  }
 
   @Output() deleteRequest = new EventEmitter<number>();
   constructor() {

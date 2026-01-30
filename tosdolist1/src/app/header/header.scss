@@ -1,4 +1,29 @@
+@use "../shared";
+
+.header {
+    @include shared.sizes(100vw,max-content);
+    padding: 40px;
+    margin: 0 auto 50px;
+    @include shared.flexbox(column,space-between,center);
+    gap: 20px;
+    background: linear-gradient(90deg,#00a63e,#00875a);
+}
+
 .title {
     text-align: center;
-    margin: 50px auto;
+    color: shared.$default-light-text-color;
+
+    &.dark {
+        color: shared.$default-text-color;
+    }
+}
+
+.toggle-box {
+    background-color: #fff;
+    padding: 7px;
+    border-radius: 23px;
+
+    &.dark {
+        background-color: #ababab;
+    }
 }

@@ -1,6 +1,6 @@
 @use "../shared";
 
-$card_creator_width: 1px;
+$card_creator_width: 2px;
 
 .card-creator {
     @include shared.sizes(475px, 32px);
@@ -9,6 +9,10 @@ $card_creator_width: 1px;
     margin: 0 auto;
     @include shared.flexbox(row,space-between,stretch);
     flex-wrap: nowrap;
+
+    &.dark {
+        border-color: #00a63e;
+    }
 }
 
 .text-field {
@@ -18,8 +22,13 @@ $card_creator_width: 1px;
     padding-left: 4px;
     font-size: 16px;
 
+    &.dark {
+        background-color: #424242;
+        color: #f8f8f8;
+    }
+
     &:focus {
-        background-color: #f3f3f3;
+        background-color: #747474;
     }
 
     &:-moz-focusring {
@@ -30,13 +39,19 @@ $card_creator_width: 1px;
 .add-btn{
     border-radius: 0 shared.$default-border-radius shared.$default-border-radius 0;
     width: 55px;
-    color: #ffffff;
+    color: shared.$default-light-text-color;
     background-color: shared.$main_button_color;
     border: none;
     @include shared.baseBtnAnimations(shared.$main_button_color);
     
     &:-moz-focusring {
         outline: none;
+    }
+}
+
+.categories-label {
+    &.dark {
+        color: shared.$default-light-text-color;
     }
 }
 
@@ -56,6 +71,11 @@ $card_creator_width: 1px;
         background-color: #fff;
         border-radius: shared.$default-border-radius;
         border: 1px solid #696969;
+
+        &.dark {
+            background-color: #424242;
+            color: #f8f8f8;
+        }
     }
 }
 
@@ -75,7 +95,7 @@ $card_creator_width: 1px;
     border-radius: shared.$default-border-radius;
     @include shared.sizes(120px, 40px);
     font-size: 20px;
-    color: #ffffff;
+    color: shared.$default-light-text-color;
     background-color: shared.$destr_button_color;
     border: none;
     @include shared.baseBtnAnimations(shared.$destr_button_color);
@@ -89,6 +109,10 @@ $card_creator_width: 1px;
     text-align: center;
     color:#696969;
     margin-bottom: 50px;
+
+    &.dark {
+        color: #8d8d8d;
+    }
 }
 
 app-card {

@@ -27,13 +27,27 @@ app-card-field {
     bottom: 20px;
     right: 20px;
     z-index: 2;
-    color: #fff;
+    color: shared.$default-light-text-color;
     animation-duration: 0.4s;
     animation-name: slidein;
+
+    &.dark {
+      background-color: darken($color: shared.$main_button_color, $amount: 10);
+
+      @include shared.baseBtnAnimations(darken($color: shared.$main_button_color, $amount: 10));
+    }
+
     @include shared.baseBtnAnimations(shared.$main_button_color);
 }
 
 .up-btn-text {
     @include shared.centerIn();
     font-size: 35px;
+}
+
+.container{
+  min-height: 100vh;
+  &.dark {
+    background-color: #2b2b2b;
+  }
 }

@@ -3,6 +3,8 @@ $main_button_color: #14b31c;
 $destr_button_color: #b31414;
 $card_button_size: 30px;
 $default-border-radius: 3px;
+$default-text-color: #121212;
+$default-light-text-color: #f0f0f0;
 
 @mixin sizes($width, $height){
     width: $width;

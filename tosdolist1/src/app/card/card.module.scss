@@ -14,7 +14,7 @@
     min-width: shared.$card_button_size;
     height: shared.$card_button_size;
     border-radius: shared.$default-border-radius;
-    color: #ffffff;
+    color: shared.$default-light-text-color;
     background-color: $bc;
     border: none;
     cursor: pointer;
@@ -53,6 +53,10 @@
             }
         }
     }
+
+    &.dark {
+        background-color: darken($color: $bc, $amount: 50);
+    }
 }
 
 .todo-card {
@@ -72,6 +76,10 @@
     flex-grow: 1;
     hyphens: auto;
     overflow-wrap: break-word;
+
+    &.dark {
+        color: #f8f8f8;
+    }
 }
 
 .button-container {

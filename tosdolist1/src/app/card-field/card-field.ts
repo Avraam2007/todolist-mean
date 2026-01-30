@@ -1,23 +1,38 @@
-import {Component, ComponentFactoryResolver, ComponentRef, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, ComponentFactoryResolver, ComponentRef, ViewChild, ViewContainerRef,inject} from '@angular/core';
 import { Card } from '../card/card';
 import {CountSingleton} from "./count";
 import { clearDatabase, getDatabase } from './db';
+import { MatDialog } from '@angular/material/dialog';
+import { InformDialog } from '../inform-dialog/inform-dialog';
+import { NgClass } from '@angular/common';
+import { IsDarkSingleton } from './isDark';
 
 
 @Component({
   selector: 'app-card-field',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './card-field.html',
   styleUrl: './card-field.scss',
 })
 export class CardField {
-  count = CountSingleton.instance;
+  countObject = CountSingleton.instance;
  
+  readonly dialog = inject(MatDialog);
+  
     @ViewChild('messagecontainer', { read: ViewContainerRef }) entry!: ViewContainerRef;
     constructor(private resolver: ComponentFactoryResolver) {
       window.onload = () => {
         this.getData();
       }
+    }
+
+    isDarkObject = IsDarkSingleton.instance;
+      isDark() {
+        return this.isDarkObject.isDark;
+      }
+      
+    openDialog(myTitle:String,myDesc:String) {
+      this.dialog.open(InformDialog, {data:{title:myTitle,desc:myDesc}});
     }
 
     async getData() {
@@ -30,11 +45,11 @@ export class CardField {
         if(data !== null && data !== undefined) {
           data.forEach((item: { title: any; status: any; }) => {
           getDatabase().push({
-            id:this.count.count,
+            id:this.countObject.count,
             title: item.title,
             status: item.status
           });
-          this.count.count++;
+          this.countObject.count++;
         });
         }
       } catch (error) {
@@ -48,7 +63,7 @@ export class CardField {
     cleanBoard(){
       this.entry.clear();
       clearDatabase();
-      this.count.count = 0;
+      this.countObject.count = 0;
       this.sendData();
     }
 
@@ -89,14 +104,14 @@ export class CardField {
             title: newComponentRef.instance.title, 
             status: newComponentRef.instance.status
           });
-          this.count.count++;
+          this.countObject.count++;
         }
         const input : HTMLInputElement = (<HTMLInputElement>document.querySelector("#cardTitle"));
         input.value = "";
     }
 
     getCurrentId():number {
-      return this.count.count;
+      return this.countObject.count;
     }
 
     isEmpty(text:string) {

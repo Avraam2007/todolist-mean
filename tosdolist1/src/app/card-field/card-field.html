@@ -1,12 +1,12 @@
- <div class="card-creator">
-    <input type="text" name="title" placeholder="Enter title card" id="cardTitle" class="text-field" required #titleInput/>
-    <button id="addCard" class="add-btn" #addCard (click)="checkCategory() ? showAlert('Error!') : (isEmpty(titleInput.value) ? showAlert('The field is empty!') : createComponent(titleInput.value,getCurrentId()))" >
+ <div class="card-creator" [ngClass]="{'dark':isDark}">
+    <input [ngClass]="{'dark':isDark()}" type="text" name="title" placeholder="Enter title card" id="cardTitle" class="text-field" required #titleInput/>
+    <button [ngClass]="{'dark':isDark()}" id="addCard" class="add-btn" #addCard (click)="checkCategory() ? showAlert('Error!') : (isEmpty(titleInput.value) ? openDialog('Error!','The value is empty!') : createComponent(titleInput.value,getCurrentId()))" >
         <p class="add-btn-text">Add</p>
     </button>
 </div>
 <div class="select-block">
-    <label for="cardCategories" class="categories-label">Choose category list: </label>
-    <select name="cardCategories" id="cardCategories" #cardCategories title="Enter" class="select" (change)="showCategoryCardsWithSync()">
+    <label for="cardCategories" class="categories-label" [ngClass]="{'dark':isDark()}">Choose category list: </label>
+    <select name="cardCategories" id="cardCategories" #cardCategories title="Enter" class="select" [ngClass]="{'dark':isDark()}" (change)="showCategoryCardsWithSync()">
         <option [value]="1" selected>
             <p class="choose-text">All</p>
         </option>
@@ -27,4 +27,4 @@
 <button class="clear-btn" id="clearBoard" #clearBoard (click)="cleanBoard()">
     <p class="clear-btn-text">Clear</p>
 </button>
-<p class="note-text">Note: please clear your board if you deleted all tasks</p>
+<p class="note-text" [ngClass]="{'dark':isDark()}">Note: please clear your board if you deleted all tasks</p>
