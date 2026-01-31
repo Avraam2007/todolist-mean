@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { getDatabase } from '../card-field/db';
+import { getDatabase } from '../../db';
 import { NgClass } from '@angular/common';
-import { IsDarkSingleton } from '../card-field/isDark';
+import { IsDarkSingleton } from '../../singletons/isDark';
+import {CountSingleton} from "../../singletons/count";
 
 @Component({
   selector: 'app-card',
@@ -17,7 +18,9 @@ export class Card {
   @Input() cardClass: "todo-card" | "todo-card-done";
   @Input() isDeleted: boolean;
 
+  countObject = CountSingleton.instance;
   isDarkObject = IsDarkSingleton.instance;
+
   isDark() {
     return this.isDarkObject.isDark;
   }
@@ -37,7 +40,12 @@ export class Card {
 
   deleteTask(id : number) {
       this.isDeleted = true;
-    //   document.getElementById(`card1-${id}`)!.remove();
+      if(getDatabase()[id].status === 'done') {
+        this.countObject.doneCards.update(value => value - 1);
+      }
+      if(getDatabase()[id].status === 'active') {
+        this.countObject.activeCards.update(value => value - 1);
+      }
       this.deleteRequest.emit(this.id);
       getDatabase()[id].status = "deleted";
   }
@@ -51,16 +59,12 @@ export class Card {
       const title = document.getElementById(`title-${id}`);
   
       if(!title) {
-          return
-      }
-  
-      const newTitle = prompt("Enter new title", title.innerText);
-  
-      if (newTitle === null) {
           return;
       }
   
-      if (newTitle!.trim() == ''){
+      const newTitle : string= prompt("Enter new title", title.innerText) as string;
+
+      if (newTitle === null || newTitle.trim() == ''){
           alert("The field is empty!");
           return;
       }
@@ -69,7 +73,9 @@ export class Card {
       getDatabase()[id].title = newTitle;
   }
 
-  doneTask(id : number) {
+  async doneTask(id : number) {
+      this.countObject.doneCards.update(value => value + 1);
+      this.countObject.activeCards.update(value => value - 1);
       document.getElementById(`doneCardBtn-${id}`)!.remove();
       document.getElementById(`card-${id}`)!.className = "todo-card-done";
       getDatabase()[id].status = "done";

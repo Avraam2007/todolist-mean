@@ -22,15 +22,19 @@ $card_creator_width: 2px;
     padding-left: 4px;
     font-size: 16px;
 
+    &:focus {
+        background-color: #f3f3f3;
+    }
+
     &.dark {
         background-color: #424242;
         color: #f8f8f8;
-    }
 
-    &:focus {
+        &:focus {
         background-color: #747474;
     }
 
+    }
     &:-moz-focusring {
         outline: none;
     }

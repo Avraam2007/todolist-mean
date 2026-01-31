@@ -1,11 +1,11 @@
 import {Component, ComponentFactoryResolver, ComponentRef, ViewChild, ViewContainerRef,inject} from '@angular/core';
 import { Card } from '../card/card';
-import {CountSingleton} from "./count";
-import { clearDatabase, getDatabase } from './db';
+import {CountSingleton} from "../../singletons/count";
+import { clearDatabase, getDatabase } from '../../db';
 import { MatDialog } from '@angular/material/dialog';
 import { InformDialog } from '../inform-dialog/inform-dialog';
 import { NgClass } from '@angular/common';
-import { IsDarkSingleton } from './isDark';
+import { IsDarkSingleton } from '../../singletons/isDark';
 
 
 @Component({
@@ -15,8 +15,7 @@ import { IsDarkSingleton } from './isDark';
   styleUrl: './card-field.scss',
 })
 export class CardField {
-  countObject = CountSingleton.instance;
- 
+  readonly countObject = CountSingleton.instance;
   readonly dialog = inject(MatDialog);
   
     @ViewChild('messagecontainer', { read: ViewContainerRef }) entry!: ViewContainerRef;
@@ -50,6 +49,20 @@ export class CardField {
             status: item.status
           });
           this.countObject.count++;
+          if(getDatabase()[getDatabase().length-1].status !== "deleted") {
+            this.countObject.totalCards.update(value => value + 1);
+          }
+          else {
+            this.countObject.deletedCards.update(value => value + 1);
+          }
+
+          if(getDatabase()[getDatabase().length-1].status === "active") {
+            this.countObject.activeCards.update(value => value + 1);
+          }
+
+          if(getDatabase()[getDatabase().length-1].status === "done") {
+            this.countObject.doneCards.update(value => value + 1);
+          }
         });
         }
       } catch (error) {
@@ -64,6 +77,10 @@ export class CardField {
       this.entry.clear();
       clearDatabase();
       this.countObject.count = 0;
+      this.countObject.totalCards.set(0);
+      this.countObject.deletedCards.set(0);
+      this.countObject.doneCards.set(0);
+      this.countObject.activeCards.set(0);
       this.sendData();
     }
 
@@ -96,6 +113,8 @@ export class CardField {
         
         // 2. Відписуємось від події, щоб не було витоку пам'яті
           sub.unsubscribe(); 
+          this.countObject.totalCards.update(value => value - 1);
+          this.countObject.deletedCards.update(value => value + 1);
         });
 
         if(getDatabase()[id1] === undefined) {
@@ -105,6 +124,8 @@ export class CardField {
             status: newComponentRef.instance.status
           });
           this.countObject.count++;
+          this.countObject.totalCards.update(value => value + 1);
+          this.countObject.activeCards.update(value => value + 1);
         }
         const input : HTMLInputElement = (<HTMLInputElement>document.querySelector("#cardTitle"));
         input.value = "";
@@ -120,7 +141,7 @@ export class CardField {
 
     checkCategory():boolean {
       const selectElement = (<HTMLInputElement>document.querySelector("#cardCategories"));
-      return (parseInt(selectElement.value) === 3 || parseInt(selectElement.value) === 4);
+      return (parseInt(selectElement.value) !== 1);
     }
 
     showAlert(text:string):void{

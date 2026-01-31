@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { Header } from "./header/header";
 import { CardField } from "./card-field/card-field";
 import { NgClass, NgIf } from '@angular/common';
-import { IsDarkSingleton } from './card-field/isDark';
+import { IsDarkSingleton } from '../singletons/isDark';
 
 @Component({
   selector: 'app-root',

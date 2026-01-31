@@ -1,6 +1,12 @@
+import { signal, WritableSignal } from "@angular/core";
+
 export class CountSingleton {
     #count :number = 0;
     static #instance : CountSingleton;
+    totalCards: WritableSignal<number> = signal(0);
+    deletedCards: WritableSignal<number> = signal(0);
+    doneCards: WritableSignal<number> = signal(0);
+    activeCards: WritableSignal<number> = signal(0);
     constructor() {
         
     }

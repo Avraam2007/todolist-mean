@@ -1,6 +1,6 @@
- <div class="card-creator" [ngClass]="{'dark':isDark}">
+ <div class="card-creator" [ngClass]="{'dark':isDark()}">
     <input [ngClass]="{'dark':isDark()}" type="text" name="title" placeholder="Enter title card" id="cardTitle" class="text-field" required #titleInput/>
-    <button [ngClass]="{'dark':isDark()}" id="addCard" class="add-btn" #addCard (click)="checkCategory() ? showAlert('Error!') : (isEmpty(titleInput.value) ? openDialog('Error!','The value is empty!') : createComponent(titleInput.value,getCurrentId()))" >
+    <button [ngClass]="{'dark':isDark()}" id="addCard" class="add-btn" #addCard (click)="checkCategory() ? openDialog('Error!','You can add cards only on \'All\' tab')  : (isEmpty(titleInput.value) ? openDialog('Error!','The value is empty!') : createComponent(titleInput.value,getCurrentId()))" >
         <p class="add-btn-text">Add</p>
     </button>
 </div>

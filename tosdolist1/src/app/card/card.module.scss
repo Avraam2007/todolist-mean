@@ -38,6 +38,10 @@
     animation-duration: 0.5s;
     animation-name: slidein;
 
+    &.dark {
+        background-color: darken($color: $bc, $amount: 50);
+    }
+
     .done-btn, .del-btn, .edit-btn {
         display: none;
     }
@@ -52,10 +56,6 @@
                 display: inline-block;
             }
         }
-    }
-
-    &.dark {
-        background-color: darken($color: $bc, $amount: 50);
     }
 }
 

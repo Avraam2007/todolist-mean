@@ -1,4 +1,4 @@
-import {getDatabase, CardObject} from "./db";
+import {getDatabase, CardObject} from "../../db";
 
 function doneTask(order : number) {
     document.getElementById(`doneCardBtn-${order}`)!.style.display = 'none';
