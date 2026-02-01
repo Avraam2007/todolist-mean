@@ -19,7 +19,7 @@ export class App {
     
   }
 
-  isDarkObject = IsDarkSingleton.instance;
+  protected readonly isDarkObject = IsDarkSingleton.instance;
     isDark() {
       return this.isDarkObject.isDark;
     }

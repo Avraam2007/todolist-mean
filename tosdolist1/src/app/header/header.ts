@@ -4,6 +4,7 @@ import { NgClass } from '@angular/common';
 import { IsDarkSingleton } from '../../singletons/isDark';
 import {MatInput} from '@angular/material/input';
 import { CountSingleton } from '../../singletons/count';
+import { IsSyncSingleton } from '../../singletons/isSync';
 
 @Component({
   selector: 'app-header',
@@ -18,12 +19,21 @@ export class Header {
   done = this.countObject.doneCards;
   active = this.countObject.activeCards;
 
-  private isDarkObject = IsDarkSingleton.instance;
+  private readonly isDarkObject = IsDarkSingleton.instance;
+  private readonly isSyncObject = IsSyncSingleton.instance;
     isDark() {
       return this.isDarkObject.isDark;
+    }
+
+    isSync() {
+      return this.isSyncObject.isSync;
     }
   
   onChange(event: MatSlideToggleChange) {
     this.isDarkObject.isDark = event.checked;
+  }
+
+  onChangeSync(event: MatSlideToggleChange) {
+    this.isSyncObject.isSync = event.checked;
   }
 }

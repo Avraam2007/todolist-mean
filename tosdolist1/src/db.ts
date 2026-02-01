@@ -1,7 +1,9 @@
+export type CardStatus = "done" | "active" | "deleted";
+
 export interface CardObject {
     id: number,
     title: String,
-    status: "done" | "active" | "deleted"
+    status: CardStatus
 }
 
 const database : CardObject[] = [];

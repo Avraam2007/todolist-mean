@@ -1,11 +1,16 @@
-const mongoose = require('mongoose');
-const assert = require('assert');
-const { title } = require('process');
-// const db = require('./db/db');
-require("dotenv").config();
+import * as mongoose from 'mongoose';
+import 'dotenv/config'; 
+import assert from 'assert';
+import { title } from 'process';
 
-const cardSchema = new mongoose.Schema({
-  simpleId: Number,
+export interface ICard {
+    id: number,
+    title: String,
+    status: "active" | "deleted" | "done"
+}
+
+const cardSchema = new mongoose.Schema<ICard>({
+  id: Number,
   title: {
     type: String,
     required: true
@@ -17,21 +22,19 @@ const cardSchema = new mongoose.Schema({
   }
 });
 
-const Card = mongoose.model('Card', cardSchema);
+const Card = mongoose.model<ICard>('Card', cardSchema);
 
-const uri = process.env.MONGO_DB_URL;
-const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+const uri = process.env.MONGO_DB_URL!;
+const clientOptions:mongoose.ConnectOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true },socketTimeoutMS: 45000,maxIdleTimeMS: 30000,};
 
 const db = mongoose.connection;
 
-module.exports = {ConnectDB, SendDB, ReadDB};
 
-
-async function ConnectDB() {
+export async function ConnectDB() {
   try {
     // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
     await mongoose.connect(uri, clientOptions);
-    await mongoose.connection.db.admin().command({ ping: 1 });
+    // await mongoose.connection.db.admin().command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } 
   catch (error) {
@@ -42,32 +45,32 @@ async function ConnectDB() {
   }
 }
 
-async function SendDB(dataArray) {
+export async function SendDB(dataArray:string) {
   await mongoose.connect(uri, clientOptions);
   try {
-    const deletedDocs = await Card.deleteMany({});
+    await Card.deleteMany({});
     const insertedDocs = await Card.insertMany(dataArray);
     console.log(`Number of documents inserted: ${insertedDocs.length}`);
-  } catch (err) {
+  } catch (err:any) {
     console.error('Error inserting documents:', err.message);
   }
-  finally {
-    await mongoose.disconnect();
-  }
+//   finally {
+//     await mongoose.disconnect();
+//   }
 }
 
-async function ReadDB() {
+export async function ReadDB() {
   await mongoose.connect(uri, clientOptions);
   try {
     const selectedDocs = await Card.find({});
     console.log(`Number of documents read: ${selectedDocs.length}`);
     return selectedDocs;
-  } catch (err) {
+  } catch (err:any) {
     console.error('Error reading documents:', err.message);
     return null;
   }
-  finally {
-    await mongoose.disconnect();
-  }
+//   finally {
+//     await mongoose.disconnect();
+//   }
 }
 

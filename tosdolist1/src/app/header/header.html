@@ -5,11 +5,14 @@
             <input matInput [ngClass]="{'dark':isDark()}" type="search" name="search" placeholder="Search" id="searchTitle" class="search-field" required #searchInput/>
         </div>
         <div class="toggle-box" [ngClass]="{'dark':isDark()}">
+            <mat-slide-toggle (change)="onChangeSync($event)" [checked]="true">Synchronize data</mat-slide-toggle>
+        </div>
+        <div class="toggle-box" [ngClass]="{'dark':isDark()}">
             <mat-slide-toggle (change)="onChange($event)">Change theme</mat-slide-toggle>
         </div>
     </div>
     <div class="characteristics">
-        <p class="total counter" id="total-counter" [ngClass]="{'dark':isDark()}">The amount of cards present: {{total()}}</p>
+        <p class="total counter" id="total-counter" [ngClass]="{'dark':isDark()}">The amount of remained cards: {{active()}} of {{total()}}</p>
         <div class="char-details">
             <p class="counter" id="counter-1" [ngClass]="{'dark':isDark()}"><span class="fa-solid fa-trash"></span>: {{deleted()}}</p>
             <p class="counter" id="counter-2" [ngClass]="{'dark':isDark()}"><span class="fa-solid fa-check"></span>: {{done()}}</p>

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { getDatabase } from '../../db';
+import { getDatabase, CardStatus } from '../../db';
 import { NgClass } from '@angular/common';
 import { IsDarkSingleton } from '../../singletons/isDark';
 import {CountSingleton} from "../../singletons/count";
@@ -12,14 +12,14 @@ import {CountSingleton} from "../../singletons/count";
 })
 
 export class Card {
-  @Input() title: String;
-  @Input() id: number;
-  @Input() status: "done" | "active" | "deleted";
-  @Input() cardClass: "todo-card" | "todo-card-done";
-  @Input() isDeleted: boolean;
+  @Input() title: String = "default";
+  @Input() id: number = 0;
+  @Input() status: CardStatus = "active";
+  @Input() cardClass: "todo-card" | "todo-card-done" = "todo-card";
+  @Input() isDeleted: boolean = false;
 
-  countObject = CountSingleton.instance;
-  isDarkObject = IsDarkSingleton.instance;
+  private readonly countObject = CountSingleton.instance;
+  private readonly isDarkObject = IsDarkSingleton.instance;
 
   isDark() {
     return this.isDarkObject.isDark;
@@ -27,11 +27,7 @@ export class Card {
 
   @Output() deleteRequest = new EventEmitter<number>();
   constructor() {
-    this.id = 0;
-    this.title = "default";
-    this.status = "active";
-    this.cardClass = "todo-card";
-    this.isDeleted = false;
+
   }
 
   getIsDeleted() {
@@ -50,7 +46,7 @@ export class Card {
       getDatabase()[id].status = "deleted";
   }
 
-  isStatus(stat: "done" | "active" | "deleted"){
+  isStatus(stat: CardStatus){
     return this.status == stat;
   }
   

@@ -1,13 +1,17 @@
-const express = require("express");
-const path = require("path");
-const ConnectDB = require('./db_connect.js');
-require("dotenv").config();
-const Card = require("./config/cards.js");
-const cors = require('cors');
-const { title } = require("process");
-let jsonData = {msg: 'This is CORS-enabled for all origins!'};
+import express, { type Application, type NextFunction, type Request, type Response } from "express";
+import path from "path";
+import {ReadDB, SendDB, ConnectDB} from './db_connect.ts';
+import 'dotenv/config'; 
+import cors from 'cors';
+import { title } from "process";
+import { fileURLToPath } from 'url';
 
-const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+let jsonData;
+
+const app : Application = express();
 
 const port = 3001;
 
@@ -21,18 +25,18 @@ app.use(cors(({
 
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.post('/', (req,res) => {
+app.post('/', (req:Request,res:Response) => {
     res.status(200);
     res.send("Main");
 })
 
-app.put('/form', (req,res) => {
+app.put('/form', (req:Request,res:Response) => {
     res.json("New GET page");
     
 })
 
-app.get('/api/tasks', async function (req, res, next) {
-  jsonData = await ConnectDB.ReadDB();
+app.get('/api/tasks', async function (req:Request, res:Response, next:NextFunction) {
+  jsonData = await ReadDB();
   res.json(jsonData);
   // res.status(200).json({
   //   message: 'JSON data retrieved successfully',
@@ -46,7 +50,7 @@ app.post('/api/tasks', function (req, res, next) {
     message: 'JSON data received successfully',
     data: jsonData
   })
-  ConnectDB.SendDB(jsonData);
+  SendDB(jsonData);
 })
 
 app.get('/lol', (req, res) => {
@@ -60,5 +64,5 @@ app.use((req,res) => {
 
 app.listen(process.env.port || port, async () => {
     console.log("App is listening on port " + port);
-    await ConnectDB.ConnectDB();
+    await ConnectDB();
 })

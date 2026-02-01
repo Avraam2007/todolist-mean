@@ -1,11 +1,12 @@
 import {Component, ComponentFactoryResolver, ComponentRef, ViewChild, ViewContainerRef,inject} from '@angular/core';
 import { Card } from '../card/card';
 import {CountSingleton} from "../../singletons/count";
-import { clearDatabase, getDatabase } from '../../db';
+import { CardStatus, clearDatabase, getDatabase } from '../../db';
 import { MatDialog } from '@angular/material/dialog';
 import { InformDialog } from '../inform-dialog/inform-dialog';
 import { NgClass } from '@angular/common';
 import { IsDarkSingleton } from '../../singletons/isDark';
+import { IsSyncSingleton } from '../../singletons/isSync';
 
 
 @Component({
@@ -15,17 +16,20 @@ import { IsDarkSingleton } from '../../singletons/isDark';
   styleUrl: './card-field.scss',
 })
 export class CardField {
-  readonly countObject = CountSingleton.instance;
-  readonly dialog = inject(MatDialog);
+  private readonly countObject = CountSingleton.instance;
+  private readonly dialog = inject(MatDialog);
+  private readonly isSyncObject = IsSyncSingleton.instance;
   
     @ViewChild('messagecontainer', { read: ViewContainerRef }) entry!: ViewContainerRef;
     constructor(private resolver: ComponentFactoryResolver) {
       window.onload = () => {
-        this.getData();
+        if(this.isSyncObject.isSync) {
+          this.getData();
+        }
       }
     }
 
-    isDarkObject = IsDarkSingleton.instance;
+    private readonly isDarkObject = IsDarkSingleton.instance;
       isDark() {
         return this.isDarkObject.isDark;
       }
@@ -81,7 +85,9 @@ export class CardField {
       this.countObject.deletedCards.set(0);
       this.countObject.doneCards.set(0);
       this.countObject.activeCards.set(0);
-      this.sendData();
+      if(this.isSyncObject.isSync) {
+          this.sendData();
+      }
     }
 
     sendData() {
@@ -97,7 +103,7 @@ export class CardField {
         .catch((error) => console.error('Error:', error));
     }
 
-    createComponent(message:String,id1:number,status?:"done" | "active" | "deleted",className?:"todo-card" | "todo-card-done") {     
+    createComponent(message:String,id1:number,status?:CardStatus,className?:"todo-card" | "todo-card-done") {     
         const factory = this.resolver.resolveComponentFactory(Card);
         const newComponentRef: ComponentRef<Card> = this.entry.createComponent(factory);
         newComponentRef.instance.title = message;
@@ -168,7 +174,9 @@ export class CardField {
 
     showCategoryCardsWithSync():void {
       this.entry.clear();
-      this.showCategoryCards()
-      this.sendData();
+      this.showCategoryCards();
+      if(this.isSyncObject.isSync) {
+          this.sendData();
+      }
     }
 }
