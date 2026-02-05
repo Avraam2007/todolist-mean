@@ -16,5 +16,6 @@ export class IsDarkSingleton {
     }
     set isDark(newValue :boolean){
         this.#isDark = newValue;
+        localStorage.setItem('isDark', newValue.toString());
     }
 }

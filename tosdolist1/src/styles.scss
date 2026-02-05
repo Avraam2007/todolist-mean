@@ -23,6 +23,7 @@ html {
     typography: Arial,
     density: 0,
   ));
+  scroll-behavior: smooth;
 }
 
 
@@ -42,7 +43,6 @@ body {
   // Reset the user agent margin.
   margin: 0;
   height: 100%;
-  scroll-behavior: smooth;
 
   &.dark {
       background-color: var(--mat-sys-on-surface);

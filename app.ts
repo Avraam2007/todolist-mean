@@ -1,10 +1,11 @@
 import express, { type Application, type NextFunction, type Request, type Response } from "express";
 import path from "path";
-import {ReadDB, SendDB, ConnectDB} from './db_connect.ts';
+import {ConnectDB} from './config/db_connect.ts';
 import 'dotenv/config'; 
 import cors from 'cors';
 import { title } from "process";
 import { fileURLToPath } from 'url';
+import tasksRouter from "./routers/tasksRouter.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -35,23 +36,7 @@ app.put('/form', (req:Request,res:Response) => {
     
 })
 
-app.get('/api/tasks', async function (req:Request, res:Response, next:NextFunction) {
-  jsonData = await ReadDB();
-  res.json(jsonData);
-  // res.status(200).json({
-  //   message: 'JSON data retrieved successfully',
-  //   data: jsonData
-  // });
-})
-
-app.post('/api/tasks', function (req, res, next) {
-  jsonData = req.body;
-  res.status(200).json({
-    message: 'JSON data received successfully',
-    data: jsonData
-  })
-  SendDB(jsonData);
-})
+app.use('/api/tasks',tasksRouter);
 
 app.get('/lol', (req, res) => {
   res.status(418).send('<h1 align="center">LOL</h1>');

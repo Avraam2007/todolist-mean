@@ -2,6 +2,10 @@
 
 $card_creator_width: 2px;
 
+.main {
+
+}
+
 .card-creator {
     @include shared.sizes(475px, 32px);
     border-radius: calc(shared.$default-border-radius + $card_creator_width);
@@ -85,6 +89,7 @@ $card_creator_width: 2px;
 
 .todo-board {
     width: 80%;
+    margin: 0 auto;
     border-radius: shared.$default-border-radius;
     height: max-content;
     // max-height: 180px;

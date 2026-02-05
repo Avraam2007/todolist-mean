@@ -59,6 +59,19 @@ export async function SendDB(dataArray:string) {
 //   }
 }
 
+export async function deleteDB(dataArray:string) {
+  await mongoose.connect(uri, clientOptions);
+  try {
+    const deletedDocs =await Card.deleteMany({});
+    console.log(`All of the documents deleted!`);
+  } catch (err:any) {
+    console.error('Error deleting documents:', err.message);
+  }
+//   finally {
+//     await mongoose.disconnect();
+//   }
+}
+
 export async function ReadDB() {
   await mongoose.connect(uri, clientOptions);
   try {

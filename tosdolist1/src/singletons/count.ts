@@ -21,6 +21,8 @@ export class CountSingleton {
         return this.#count
     }
     set count(num :number){
-        this.#count = num;
+        if(num >= 0) {
+            this.#count = num;
+        }
     }
 }

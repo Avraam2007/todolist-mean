@@ -1,8 +1,5 @@
 <div class="container" [ngClass]="{'dark':isDark()}">
-  <app-header></app-header>
-  <main>
-    <app-card-field></app-card-field>
-  </main>
+    <!-- <app-card-field></app-card-field> -->
   <div class="up-btn" [ngClass]="{'dark':isDark()}" *ngIf="windowScrolled" (click)="toTheTop()" id="topButton" #idButton>
       <p class="up-btn-text fa-solid fa-angle-up"></p>
   </div>

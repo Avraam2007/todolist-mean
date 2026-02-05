@@ -7,11 +7,12 @@ import { InformDialog } from '../inform-dialog/inform-dialog';
 import { NgClass } from '@angular/common';
 import { IsDarkSingleton } from '../../singletons/isDark';
 import { IsSyncSingleton } from '../../singletons/isSync';
+import { Header } from '../header/header';
 
 
 @Component({
   selector: 'app-card-field',
-  imports: [NgClass],
+  imports: [NgClass, Header],
   templateUrl: './card-field.html',
   styleUrl: './card-field.scss',
 })
@@ -55,17 +56,17 @@ export class CardField {
           this.countObject.count++;
           if(getDatabase()[getDatabase().length-1].status !== "deleted") {
             this.countObject.totalCards.update(value => value + 1);
+            
+            if(getDatabase()[getDatabase().length-1].status === "active") {
+              this.countObject.activeCards.update(value => value + 1);
+            }
+
+            if(getDatabase()[getDatabase().length-1].status === "done") {
+              this.countObject.doneCards.update(value => value + 1);
+            }
           }
           else {
             this.countObject.deletedCards.update(value => value + 1);
-          }
-
-          if(getDatabase()[getDatabase().length-1].status === "active") {
-            this.countObject.activeCards.update(value => value + 1);
-          }
-
-          if(getDatabase()[getDatabase().length-1].status === "done") {
-            this.countObject.doneCards.update(value => value + 1);
           }
         });
         }

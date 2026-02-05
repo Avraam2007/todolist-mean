@@ -2,7 +2,10 @@
     <h1 class="title" [ngClass]="{'dark':isDark()}">Todo List</h1>
     <div class="params">
         <div class="toggle-box" [ngClass]="{'dark':isDark()}">
-            <input matInput [ngClass]="{'dark':isDark()}" type="search" name="search" placeholder="Search" id="searchTitle" class="search-field" required #searchInput/>
+            <div class="wrapper">
+                <input matInput [ngClass]="{'dark':isDark()}" type="search" name="search" placeholder="Search" id="searchTitle" class="search-field" required #searchInput/>
+                <button class="search-button fa-solid fa-search" [ngClass]="{'dark':isDark()}"></button>
+            </div>
         </div>
         <div class="toggle-box" [ngClass]="{'dark':isDark()}">
             <mat-slide-toggle (change)="onChangeSync($event)" [checked]="true">Synchronize data</mat-slide-toggle>
